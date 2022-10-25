@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 7 -> Async Await</title>
+  </head>
+  <body>
+    <h4>Task Coming</h4>
+
+    <script>
+      console.log("person1 shows ticket");
+      console.log("person2 shows ticket");
+
+      const promiseWifeBringTicks = new Promise((resolve, reject) => {
+        setTimeout(() => {
+        resolve('ticket');
+        }, 3000)
+       });
+
+       promiseWifeBringTicks.then((t) => {
+        console.log(`person3: shows ${t}`);
+       });
+
+       console.log('person4: shows ticket');
+       console.log('person5: shows ticket');
+    </script>
+  </body>
+</html>
