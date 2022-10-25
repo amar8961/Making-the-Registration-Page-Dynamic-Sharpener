@@ -50,7 +50,7 @@
             // posts.push({ ...post, createdAt: new Date().getTime() });
             posts.push(post);
 
-            const error = false;
+            const error = true;
 
             if (!error) {
               resolve();
@@ -61,7 +61,9 @@
         });
       }
 
-      createPost({ title: "Post Three", body: "This is post Three" }).then(getPosts);
+      createPost({ title: "Post Three", body: "This is post Three" })
+        .then(getPosts)
+        .catch((err) => console.log(err));
     </script>
   </body>
 </html>
