@@ -70,7 +70,20 @@
       createPost({ title: "Post Three", body: "This is post Three" }).then(
         () => {
           getPosts();
-          deletePost().then(() => {});
+          deletePost().then(() => {
+            getPosts();
+            deletePost().then(() => {
+              getPosts();
+              deletePost().then(() => {
+                getPosts();
+                deletePost()
+                  .then(() => {})
+                  .catch((err) => {
+                    console.log("Inside catch block", err);
+                  });
+              });
+            });
+          });
         }
       );
     </script>
