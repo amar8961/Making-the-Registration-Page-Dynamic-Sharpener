@@ -25,26 +25,9 @@
 
         let ticket = await promiseWifeBringingTicks;
 
-        console.log(`wife: i have the ${ticket}`);
-        console.log('husband: we should go in');
-        console.log('wife: no i am hungary');
+        let [popcorn, butter, coldDrink] = await Promise.all([getPopcorn, addButter, getColdDrink])
 
-        let popcorn = await getPopcorn;
-
-        console.log(`husband: i got some ${popcorn}`);
-        console.log('husband: we should go in');
-        console.log('wife: I need butter on my popcorn');
-
-        let butter = await addButter;
-
-        console.log(`husband: i got some ${butter} on popcorn`);
-        console.log('husband: anything else darling ?');
-        console.log('wife: lets got we are getting late');
-        console.log('hunband: thank you for the reminder *grins*');
-
-        let coldDrink = await getColdDrink;
-
-        console.log(`wife: we forget to buy ${coldDrink}`);
+        console.log(`${popcorn}, ${butter}, ${coldDrink}`);
 
         return ticket;
       }
