@@ -67,27 +67,35 @@
         });
       }
 
-      createPost({ title: "Post Three", body: "This is post Three" });
-      createPost({ title: "Post Four", body: "This is post Four" }).then(() => {
-        getPosts();
-        deletePost().then(() => {
-          getPosts();
-          deletePost().then(() => {
-            getPosts();
-            deletePost().then(() => {
-              getPosts();
-              deletePost().then(() => {
-                getPosts();
-                deletePost()
-                  .then(() => {})
-                  .catch((err) => {
-                    console.log("Inside catch block", err);
-                  });
-              });
-            });
-          });
-        });
-      });
+    //   createPost({ title: "Post Three", body: "This is post Three" });
+    //   createPost({ title: "Post Four", body: "This is post Four" }).then(() => {
+    //     getPosts();
+    //     deletePost().then(() => {
+    //       getPosts();
+    //       deletePost().then(() => {
+    //         getPosts();
+    //         deletePost().then(() => {
+    //           getPosts();
+    //           deletePost().then(() => {
+    //             getPosts();
+    //             deletePost()
+    //               .then(() => {})
+    //               .catch((err) => {
+    //                 console.log("Inside catch block", err);
+    //               });
+    //           });
+    //         });
+    //       });
+    //     });
+    //   });
+
+    // Promise All
+    const Promise1 = Promise.resolve('Hello World');
+    const Promise2 = 10;
+    const Promise3 = new Promise((resolve, reject) =>
+    setTimeout(resolve, 2000, 'Goodbye')
+    );
+    Promise.all([Promise1, Promise2, Promise3]).then(values => console.log(values));
     </script>
   </body>
 </html>
