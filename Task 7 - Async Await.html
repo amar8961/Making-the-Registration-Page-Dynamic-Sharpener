@@ -19,10 +19,13 @@
         }, 3000)
        });
 
-       promiseWifeBringTicks.then((t) => {
-        console.log(`person3: shows ${t}`);
+       const getPopcorn = promiseWifeBringTicks.then((t) => {
+        console.log('husband: we should go in');
+        console.log('wife: no i am hungary');
+        return new Promise((resolve, reject) => resolve(`${t} popcorn`))
        });
 
+       getPopcorn.then((t) => console.log(t))
        console.log('person4: shows ticket');
        console.log('person5: shows ticket');
     </script>
