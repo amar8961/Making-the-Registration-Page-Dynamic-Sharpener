@@ -21,6 +21,8 @@
 
         const addButter = new Promise((resolve, reject) => resolve(`butter`));
 
+        const getColdDrink = new Promise ((resolve, reject) => resolve(`coldDrink`));
+
         let ticket = await promiseWifeBringingTicks;
 
         console.log(`wife: i have the ${ticket}`);
@@ -39,6 +41,10 @@
         console.log('husband: anything else darling ?');
         console.log('wife: lets got we are getting late');
         console.log('hunband: thank you for the reminder *grins*');
+
+        let coldDrink = await getColdDrink;
+
+        console.log(`wife: we forget to buy ${coldDrink}`);
 
         return ticket;
       }
