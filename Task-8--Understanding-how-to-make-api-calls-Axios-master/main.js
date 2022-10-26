@@ -98,7 +98,11 @@ function transformResponse() {
 // ERROR HANDLING
 function errorHandling() {
   axios
-    .get("https://jsonplaceholder.typicode.com/todoss")
+    .get("https://jsonplaceholder.typicode.com/todoss", {
+      validateStatus: function(status) {
+        return status < 500;  // Reject only if status is greater or equal to 500
+      }
+    })
     .then((res) => showOutput(res))
     .catch((err) => {
       if (error.response) {
