@@ -119,7 +119,22 @@ function errorHandling() {
 
 // CANCEL TOKEN
 function cancelToken() {
-  console.log("Cancel Token");
+  const source = axios.CancelToken.source();
+
+  axios
+    .get("https://jsonplaceholder.typicode.com/todoss", {
+      cancelToken: source.token,
+    })
+    .then((res) => showOutput(res))
+    .catch((thrown) => {
+      if (axios.isCancel(thrown)) {
+        console.log("Request Canceled", thrown.message);
+      }
+    });
+
+  if (true) {
+    source.cancel("Request Canceled !");
+  }
 }
 
 // INTERCEPTING REQUESTS & RESPONSES -> sent request todos and posts at the same time
