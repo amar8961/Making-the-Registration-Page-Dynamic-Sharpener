@@ -101,7 +101,7 @@
         // now comes async await.
     </script> -->
 
-    <script>
+    <!-- <script>
         // async await
 
         function buycar(){
@@ -151,6 +151,59 @@
 
         // async await always work with Promises. Does not work with setTimeout 
         // because setTimeout is not Promise based. So waiting for it does not make sense. 
+    </script> -->
+
+    <script>
+        // error handling
+
+        function buycar(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    res('Buy a Car')
+                }, 5000)
+            })
+        }
+
+        function planatrip(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    res('lets go to manali')
+                }, 2000)
+            })
+        }
+
+        function reachmanali(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    res('reached manali')
+                }, 1000)
+            })
+        }
+
+        function gotofamousmountain(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    rej('Error : Some Accident Happened')
+                }, 1000)
+            })
+        }
+
+        async function fun1(){
+            try{
+            const msg = await buycar();
+            console.log(msg)
+            const msg2 = await planatrip();
+            console.log(msg2)
+            const msg3 = await reachmanali();
+            console.log(msg3)
+            const msg4 = await gotofamousmountain();
+            console.log(msg4)
+            }catch(err){
+                console.log(err)
+            }
+        }
+
+        fun1()
     </script>
 </body>
 </html>
