@@ -11,7 +11,13 @@ function getTodos() {
 
 // POST REQUEST
 function addTodo() {
-  console.log("POST Request");
+  axios
+    .post("https://jsonplaceholder.typicode.com/todos", {
+      title: 'New Todo',
+      completed: false
+    })
+    .then((res) => showOutput(res))
+    .catch((err) => console.error(err));
 }
 
 // PUT/PATCH REQUEST
