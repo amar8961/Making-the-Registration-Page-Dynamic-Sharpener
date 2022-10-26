@@ -119,7 +119,9 @@ axios.interceptors.request.use(
   }
 );
 
-// AXIOS INSTANCES
+// AXIOS INSTANCES/GLOBALS -> Create Global for Token -> we see token with every request
+axios.defaults.headers.common["X-Auth-Token"] =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
 
 // Show output in browser
 function showOutput(res) {
