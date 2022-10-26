@@ -75,7 +75,21 @@ function cancelToken() {
   console.log("Cancel Token");
 }
 
-// INTERCEPTING REQUESTS & RESPONSES
+// INTERCEPTING REQUESTS & RESPONSES -> sent request todos and posts at the same time
+axios.interceptors.request.use(
+  (config) => {
+    console.log(
+      `${config.method.toUpperCase()} request sent to ${
+        config.url
+      } at ${new Date().getTime()}`
+    );
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // AXIOS INSTANCES
 
