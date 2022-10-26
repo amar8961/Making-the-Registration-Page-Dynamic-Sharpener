@@ -7,9 +7,9 @@
     <title>Task 7.1 - callback vs promises discovered & are async await better than promise</title>
 </head>
 <body>
-    <script>
+    <!-- <script>
         // callback()
-        
+
         function buycar(cb1, cb2, cb3){
             setTimeout(() => {
                 console.log('buy a car')
@@ -45,6 +45,60 @@
         // everytime i have to add a new callback for new function.
         // we have to write more code each and every function.
         // this problem solvem by promises, this is why promises were invented.
+    </script> -->
+
+    <script>
+        // Promise
+
+        function buycar(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    res('Buy a Car')
+                }, 5000)
+            })
+        }
+
+        function planatrip(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    res('lets go to manali')
+                }, 2000)
+            })
+        }
+
+        function reachmanali(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    res('reached manali')
+                }, 1000)
+            })
+        }
+
+        function gotofamousmountain(){
+            return new Promise((res , rej) => {
+                setTimeout(() => {
+                    res('reached mountain')
+                }, 1000)
+            })
+        }
+
+        buycar().then((msg) => {
+            console.log(msg)
+            planatrip().then((msg2) =>{
+                console.log(msg2)
+                reachmanali().then((msg3) => {
+                    console.log(msg3)
+                    gotofamousmountain().then((msg4) => {
+                        console.log(msg4)
+                    })
+                })
+            })
+        })
+
+        // this is Promise.
+        // this code became very ugly coding one then, inside another then, inside another then.
+        // its becoming very very messy.
+        // now comes async await.
     </script>
 </body>
 </html>
