@@ -13,8 +13,8 @@ function getTodos() {
 function addTodo() {
   axios
     .post("https://jsonplaceholder.typicode.com/todos", {
-      title: 'New Todo',
-      completed: false
+      title: "New Todo",
+      completed: false,
     })
     .then((res) => showOutput(res))
     .catch((err) => console.error(err));
@@ -24,8 +24,8 @@ function addTodo() {
 function updateTodo() {
   axios
     .patch("https://jsonplaceholder.typicode.com/todos/1", {
-      title: 'Updated Todo',
-      completed: true
+      title: "Updated Todo",
+      completed: true,
     })
     .then((res) => showOutput(res))
     .catch((err) => console.error(err));
@@ -39,9 +39,20 @@ function removeTodo() {
     .catch((err) => console.error(err));
 }
 
-// SIMULTANEOUS DATA
+// SIMULTANEOUS DATA -> todos and posts at the same time -> axios.all
 function getData() {
-  console.log("Simultaneous Request");
+  axios
+    .all([
+      axios.get("https://jsonplaceholder.typicode.com/todos?_limit=5"),
+      axios.get("https://jsonplaceholder.typicode.com/posts?_limit=5"),
+    ])
+    // .then(res => {
+    //   console.log(res[0]);
+    //   console.log(res[1]);
+    //   showOutput(res[1]);
+    // })
+    .then(axios.spread((todos, posts) => showOutput(posts)))
+    .catch((err) => console.error(err));
 }
 
 // CUSTOM HEADERS
