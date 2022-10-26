@@ -154,7 +154,11 @@ axios.interceptors.request.use(
 );
 
 // AXIOS INSTANCES
-
+const axiosInstance = axios.create({
+  // Other custom settings
+  baseURL: "https://jsonplaceholder.typicode.com",
+});
+axiosInstance.get("/comments").then((res) => showOutput(res));
 
 // AXIOS GLOBALS -> Create Global for Token -> we see token with every request
 axios.defaults.headers.common["X-Auth-Token"] =
