@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 7.1 - callback vs promises discovered & are async await better than promise</title>
+</head>
+<body>
+    <script>
+        // callback()
+        
+        function buycar(cb1, cb2, cb3){
+            setTimeout(() => {
+                console.log('buy a car')
+                cb1(cb2, cb3);
+            }, 5000)
+        }
+
+        function planatrip(cb1, cb2){
+            setTimeout(() => {
+                console.log('lets go to manali')
+                cb1(cb2);
+            }, 2000)
+        }
+
+        function reachmanali(cb){
+            setTimeout(() => {
+                console.log('reached manali')
+                cb();
+            }, 1000)
+        }
+
+        function gotofamousmountain(){
+            setTimeout(() => {
+                console.log('reached mountain')
+            }, 1000)
+        }
+
+        buycar(planatrip, reachmanali, gotofamousmountain)
+
+        // this is callback -> code is getting badly structured.
+        // for one function we have make changes into three more function.
+        // code is becoming unreadable.
+        // everytime i have to add a new callback for new function.
+        // we have to write more code each and every function.
+        // this problem solvem by promises, this is why promises were invented.
+    </script>
+</body>
+</html>
