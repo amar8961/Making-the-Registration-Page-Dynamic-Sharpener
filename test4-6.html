@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making the Registration Page Dynamic</title>
+  </head>
+  <body>
+    <h4>Task Coming</h4>
+
+    <script>
+      const posts = [
+        {
+          title: "Post One",
+          body: "This is post one",
+          createdAt: new Date().getTime(),
+        },
+        {
+          title: "Post Two",
+          body: "This is post two",
+          createdAt: new Date().getDate(),
+        },
+      ];
+
+      function getPosts() {
+        setTimeout(() => {
+          let output = "";
+          posts.forEach((post, index) => {
+            output += `<li>${post.title} - created on ${
+              (post.createdAt)}</li>`;
+          });
+          document.body.innerHTML = output;
+        }, 1000);
+      }
+
+      function updatelastactivitytime() {
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                user.lastactivitytime = new Date().getTime()
+                resolve(user.lastactivitytime)
+            }, 1000)
+        })
+      }
+
+      function createPost(post) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            posts.push({ ...post, createdAt: new Date().getTime() });
+
+            const error = false; // turn -> false to true, to see error message
+
+            if (!error) {
+              resolve(posts);
+            } else {
+              reject("Error : Something went wrong");
+            }
+          }, 2000);
+        });
+      }
+
+      // function deletePost() {
+      //   return new Promise((resolve, reject) => {
+      //     setTimeout(() => {
+      //       if (posts.length > 0) {
+      //         const lastelement = posts.pop();
+      //         resolve(lastelement);
+      //       } else {
+      //         reject("Array is empty now");
+      //       }
+      //     }, 1000);
+      //   });
+      // }
+
+      
+
+      ///////////////////////// try
+    //   const user = {
+    //     username: 'yash',
+    //     lastactivitytime: '13th of Jan'
+    //   }
+      
+      // function updatelastactivitytime() {
+      //   return new Promise((resolve, reject) => {
+      //       setTimeout(()=>{
+      //           Promise.all.lastactivitytime = new Date().getTime()
+      //           resolve(user.lastactivitytime)
+      //       }, 1000)
+      //   })
+      // }
+      
+    //   function userupdatesapost(){
+    //     Promise.all([createPost, updatelastactivitytime])
+    //     .then(([createPostrosolves, updatelastactivitytimeresolves]) => {
+    //         console.log(updatelastactivitytimeresolves)
+    //     })
+    //     .catch(err => console.log(err))
+    //   }
+      ///////////////////////////////// till try
+
+    //   createPost({ title: "Post Three", body: "This is post Three" });
+    //   createPost({ title: "Post Four", body: "This is post Four" }).then(() => {
+    //     getPosts();
+    //     deletePost().then(() => {
+    //       getPosts();
+    //       deletePost().then(() => {
+    //         getPosts();
+    //         deletePost().then(() => {
+    //           getPosts();
+    //           deletePost().then(() => {
+    //             getPosts();
+    //             deletePost()
+    //               .then(() => {})
+    //               .catch((err) => {
+    //                 console.log("Inside catch block", err);
+    //               });
+    //           });
+    //         });
+    //       });
+    //     });
+    //   });
+
+    /////////////
+
+    getPosts()
+    console.log(getPosts.values)
+
+
+    ///////////////////
+
+    // // Promise All
+    // const Promise1 = Promise.resolve('Hello World');
+    // const Promise2 = 10;
+    // const Promise3 = new Promise((resolve, reject) =>
+    // setTimeout(resolve, 2000, 'Goodbye')
+    // );
+    // Promise.all([Promise1, Promise2, Promise3]).then(values => console.log(values));
+
+    ////////////////////////// try
+    // Promise.all([Promise1, Promise2, Promise3]).then(console.log(updatelastactivitytime()));
+    // values => console.log(values)
+    </script>
+  </body>
+</html>

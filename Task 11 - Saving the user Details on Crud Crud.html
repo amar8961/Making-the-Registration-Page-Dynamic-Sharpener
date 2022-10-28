@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body style="background-color: green;"><br><br><br>
+    <div style="border: 5px red solid; background-color: orange;">
+        <h2 style="text-align:center; color: yellow; ">BOOK A CALL</h2>
+        <h4 style="text-align:center;">Book a Call and our team will call you</h4>
+        <hr width="100%" size="5px" style="background-color:black;">
+        <form style="text-align:center" action="#" id="my-form" onsubmit="register() , saveToLocalStorage(event)">
+            <div class="msg" style="background-color: green; padding: 5px; margin: 5px;"></div>
+            <label>Name</label>
+            <input type="text" id="name" placeholder="name"><br><br>
+            <label>Email</label>
+            <input type="text" id="email" placeholder="email"><br><br>
+            <label>Phone</label>
+            <input type="text" id="phone" placeholder="phone"><br><br>
+            <input type="date" id="date"> <input type="time" id="time"><br><br>
+            <input class="btn" type="submit" value="get a call">
+            <input class="rbtn" id="rbtn" type="button" value="Reset">
+        </form>
+        <ul id="users"></ul>
+    </div>
+    <div>
+        <ul class="items" style="background-color: black;">
+            <li class="item">Item 1</li>
+            <li class="item">Item 2</li>
+        </ul>
+    </div>
+    <script>
+        function register() {
+            var pname = document.getElementById('name').value
+            var pemail = document.getElementById('email').value
+            var pphone = document.getElementById('phone').value
+            var pdate = document.getElementById('date').value
+            var ptime = document.getElementById('time').value
+            console.log(pname,pemail,pphone,pdate,ptime)
+        }
+
+        // MANIPULATING THE DOM
+        const ul = document.querySelector('.items');
+        // ul.remove();
+        // ul.lastElementChild.remove();
+        ul.firstElementChild.textContent = 'Hello';
+        ul.firstElementChild.style.color = 'red';
+        ul.children[1].innerHTML = '<h1>Second</h1>'; //select with index
+        ul.children[1].style.color = 'yellow';
+
+        // change button color
+        const btn = document.querySelector('.btn');
+        btn.style.background = 'red';
+
+        // Mouse Event - click
+        const rbtn = document.querySelector('#rbtn');
+        rbtn.addEventListener('click', e => {
+          e.preventDefault();
+        //   console.log(e.target.className);
+          document.getElementById('my-form').style.background = '#ccc';
+        //   document.querySelector('body').classList.add('bg-dark');
+          ul.lastElementChild.innerHTML = '<h1>Reset</h1>';
+          const nameInput = document.querySelector('#name');
+          const emailInput = document.querySelector('#email');
+          const phoneInput = document.querySelector('#phone');
+          nameInput.value = '';
+          emailInput.value = '';
+          phoneInput.value = '';
+        });
+        // Mouse Event - mouseover
+        rbtn.addEventListener('mouseover', e => {
+          e.preventDefault(); 
+          document.getElementById('rbtn').style.color = '#FF0000';
+        });
+        // Mouse Event - mouseout
+        rbtn.addEventListener('mouseout', e => {
+          e.preventDefault(); 
+          document.getElementById('rbtn').style.color = '#000000';
+        });
+        
+        // Put DOM elements into variables
+        const myForm = document.querySelector('#my-form');
+        const nameInput = document.querySelector('#name');
+        const emailInput = document.querySelector('#email');
+        const phoneInput = document.querySelector('#phone');
+        const dateInput = document.querySelector('#date');
+        const TimeInput = document.querySelector('#Time');
+        const msg = document.querySelector('.msg');
+        const userList = document.querySelector('#users');
+
+        // Listen for form submit
+        myForm.addEventListener('submit', onSubmit);
+
+        function onSubmit(e) {
+          e.preventDefault();
+  
+          if(nameInput.value === '' || emailInput.value === '' || phoneInput.value === '') {
+            // alert('Please enter all fields');
+            //msg.classList.add('error'); // // add css from external css file (.error)
+            msg.innerHTML = 'Please enter all fields';
+
+            // Remove error after 3 seconds
+            setTimeout(() => msg.remove(), 3000);
+          } else {
+            // Create new list item with user
+            const li = document.createElement('li');
+
+            // Add text node with input values
+            li.appendChild(document.createTextNode(`Name : ${nameInput.value} , Email : ${emailInput.value} , Phone : ${phoneInput.value}`));
+
+            // Add HTML
+            // li.innerHTML = `<strong>${nameInput.value}</strong>e: ${emailInput.value}`;
+
+            // Append to ul
+            userList.appendChild(li);
+
+            // Clear fields
+            nameInput.value = '';
+            emailInput.value = '';
+            phoneInput.value = '';
+          }
+        }
+    </script>
+    <!-- store the details entered by the user in the local storage when he clicks on submit. -->
+    <script>
+      function saveToLocalStorage(event){
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const phone = event.target.phone.value;
+        // localStorage.setItem('name',name);
+        // localStorage.setItem('email',email);
+        // localStorage.setItem('phone',phone); 
+
+      // Lets store the users in the right format ->
+      const obj = {
+          name:name,
+          email:email,
+          phone:phone
+        }
+        localStorage.setItem("userDetails", JSON.stringify(obj));
+        // Lets scale the app to more users
+        localStorage.setItem(obj.email, JSON.stringify(obj));
+        showNewUserOnScreen(obj);
+      } 
+      function showNewUserOnScreen(user){
+        if(localStorage.getItem(user.email) !== null){
+            removeUserFromScreen(user.email)
+        }
+
+        const parentNode = document.getElementById('listOfUsers');
+        const childHTML = `<li id=${user.email}> ${user.name} - ${user.email} - ${user.phone}
+                                 <button onclick=deleteUser('${user.email}')> Delete User </button>
+                                 <button onclick=editUserDetails('${user.name}','${user.email}','${user.phone}')> Edit </button>
+                            </li>`
+
+        parentNode.innerHTML = parentNode.innerHTML + childHTML;
+      }
+
+      // Delete/Edit data from Local Storage
+      // deleteUse
+      function deleteUser(emailId){
+          console.log(emailId)
+          localStorage.removeItem(emailId);
+          removeUserFromScreen(emailId);
+
+      }
+
+      function removeUserFromScreen(emailId){
+          const parentNode = document.getElementById('listOfUsers');
+          const childNodeToBeDeleted = document.getElementById(emailId);
+
+          if(childNodeToBeDeleted) {
+              parentNode.removeChild(childNodeToBeDeleted)
+          }
+      }
+
+      // Edit User
+      function editUserDetails(name, emailId, phone){
+        //document.getElementById('emailId').value =emailId;
+        document.getElementById('name').value = name;
+        document.getElementById('email').value = emailId;
+        document.getElementById('phone').value = phone;
+        
+        deleteUser(emailId)
+    }
+    </script>
+    <!-- Lets scale the app to more users  -->
+    <ul id='listOfUsers'></ul>
+</body>
+</html>
