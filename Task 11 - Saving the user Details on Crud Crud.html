@@ -123,6 +123,11 @@
           }
         }
     </script>
+
+    <!-- add axios libraries for Making the Registration Page Dynamic_Task 11 - Saving the user Details on Crud Crud -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+
     <!-- store the details entered by the user in the local storage when he clicks on submit. -->
     <script>
       function saveToLocalStorage(event){
@@ -140,10 +145,23 @@
           email:email,
           phone:phone
         }
-        localStorage.setItem("userDetails", JSON.stringify(obj));
+        
+        // add axios libraries'post' for Making the Registration Page Dynamic_Task 11 - Saving the user Details on Crud Crud
+
+        axios.post("https://crudcrud.com/api/46f64a00dc7a4e79bfaa6835d0d0be4b/taskData",obj)
+            .then((response) => {
+              showNewUserOnScreen(response.data);
+              console.log(response)
+            })
+            .catch((err) => {
+              document.body.innerHTML = document.body.innerHTML + "<h4> Something went wrong </h4>"
+              console.log(err)
+            })
+        
+        // localStorage.setItem("userDetails", JSON.stringify(obj));
         // Lets scale the app to more users
-        localStorage.setItem(obj.email, JSON.stringify(obj));
-        showNewUserOnScreen(obj);
+        // localStorage.setItem(obj.email, JSON.stringify(obj));
+        // showNewUserOnScreen(obj);
       } 
       function showNewUserOnScreen(user){
         if(localStorage.getItem(user.email) !== null){
