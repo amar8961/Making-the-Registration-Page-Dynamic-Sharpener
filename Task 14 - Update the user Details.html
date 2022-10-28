@@ -210,6 +210,7 @@
       });
 
       // update function showNewUserOnScreen(user) for Making the Registration Page Dynamic_Task 13 -> Deleting the Appointments
+      // update function showNewUserOnScreen(user), edit button for Making the Registration Page Dynamic_Task 14 -> Update the user Details
 
       function showNewUserOnScreen(user) {
         // user = {
@@ -225,7 +226,7 @@
         const parentNode = document.getElementById("listOfUsers");
         const childHTML = `<li id=${user._id}> ${user.name} - ${user.email} - ${user.phone}
                                  <button onclick=deleteUser('${user._id}')> Delete User </button>
-                                 <button onclick=editUserDetails('${user._id}','${user.email}','${user.phone}')> Edit </button>
+                                 <button onclick=editUserDetails('${user.name}','${user.email}','${user.phone}','${user._id}')> Edit </button>
                             </li>`;
 
         parentNode.innerHTML = parentNode.innerHTML + childHTML;
@@ -268,13 +269,16 @@
       }
 
       // Edit User
-      function editUserDetails(name, emailId, phone) {
+
+      // update function editUserDetails( ) for Making the Registration Page Dynamic_Task 14 -> Update the user Details
+
+      function editUserDetails(name, emailId, phone, userId) {
         //document.getElementById('emailId').value =emailId;
         document.getElementById("name").value = name;
         document.getElementById("email").value = emailId;
         document.getElementById("phone").value = phone;
 
-        deleteUser(emailId);
+        deleteUser(userId);
       }
     </script>
     <!-- Lets scale the app to more users  -->
