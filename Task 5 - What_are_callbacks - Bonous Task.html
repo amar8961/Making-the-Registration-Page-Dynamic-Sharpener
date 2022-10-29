@@ -22,11 +22,11 @@
           createdAt: new Date().getTime(),
         },
       ];
-      let intervalId = 0;
 
+      // record when the post was created.
+      
       function getPosts() {
-        clearInterval(intervalId);
-        intervalId = setInterval(() => {
+        setTimeout(() => {
           let output = "";
           posts.forEach((post, index) => {
             output += `<li>${post.title} - created ${
@@ -37,26 +37,16 @@
         }, 1000);
       }
 
-    //   function createPost(post, callback) {
-    //     setTimeout(() => {
-    //       posts.push({ ...post, createdAt: new Date().getTime() });
-    //       callback();
-    //     }, 2000);
-    //   }
+      // add a timer which states last edited in seconds ago and it keeps changing every second. using setInterval( )
 
-    //   function create4posts(post, callback) {
-    //     setTimeout(() => {
-    //       posts.push({ ...post, createdAt: new Date().getTime() });
-    //       callback();
-    //     }, 6000);
-    //   }
+      let intervalId = 0;
 
       function lastEditedInSecondsAgo() {
         clearInterval(intervalId);
         intervalId = setInterval(() => {
           let output = "";
           posts.forEach((post, index) => {
-            output += `<li>${post.title} - created ${
+            output += `<li>${post.title} - Last Edited - ${
               (new Date().getTime() - post.createdAt) / 1000
             } seconds ago</li>`;
           });
@@ -64,9 +54,22 @@
         }, 1000);
       }
 
-    //   createPost({ title: "Post Three", body: "This is post three" }, getPosts);
-    //   create4posts({ title: "Post Four", body: "This is post four" }, getPosts);
-    getPosts()
+      function createPost(post, callback) {
+        setTimeout(() => {
+          posts.push({ ...post, createdAt: new Date().getTime() });
+          callback();
+        }, 2000);
+      }
+
+      function create4posts(post, callback) {
+        setTimeout(() => {
+          posts.push({ ...post, createdAt: new Date().getTime() });
+          callback();
+        }, 5000);
+      }
+
+      createPost({ title: "Post Three", body: "This is post three" }, lastEditedInSecondsAgo);
+      create4posts({ title: "Post Four", body: "This is post four" }, lastEditedInSecondsAgo);
     </script>
   </body>
 </html>
