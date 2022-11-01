@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making the Registration Page Dynamic</title>
+  </head>
+  <body>
+    <h4>Task Coming</h4>
+
+    <script>
+      const posts = [
+        {
+          title: "Post One",
+          body: "This is post one",
+        },
+        {
+          title: "Post Two",
+          body: "This is post two",
+        },
+      ];
+
+      function getPosts() {
+        return new Promise((resolve, reject) => {
+          let output = "";
+          posts.forEach((post, index) => {
+            output += `<li>${
+              post.title
+            } - created ${new Date()} seconds ago</li>`;
+          });
+          document.body.innerHTML = output;
+          resolve(posts);
+        });
+      }
+
+      function updatelastactivitytime() {
+        return new Promise((resolve, reject) => {
+          resolve(new Date().getTime());
+        });
+      }
+
+      function createPost(post) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            posts.push(post);
+
+            const error = false; // turn -> false to true, to see error message
+
+            if (!error) {
+              resolve(getPosts());
+            } else {
+              reject("Error : Something went wrong");
+            }
+          }, 2000);
+        });
+      }
+
+      // function deletePost() {
+      //   return new Promise((resolve, reject) => {
+      //     setTimeout(() => {
+      //       if (posts.length > 0) {
+      //         const lastelement = posts.pop();
+      //         resolve(lastelement);
+      //       } else {
+      //         reject("Array is empty now");
+      //       }
+      //     }, 1000);
+      //   });
+      // }
+
+      console.log("Before Creating Last Post -> " + new Date());
+      console.log("After Creating Last Post >>>");
+      Promise.all([createPost({ title: "Post Three", body: "This is post three" }), updatelastactivitytime(),]).then(([pos, lat]) => console.log(pos, "Last ActiTime -> " + lat));
+      // promise 'resolve' ka part he console me aata ha.
+    </script>
+  </body>
+</html>
