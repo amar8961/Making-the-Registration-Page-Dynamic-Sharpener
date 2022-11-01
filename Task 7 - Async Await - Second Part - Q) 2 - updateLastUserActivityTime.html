@@ -56,23 +56,26 @@
         });
       }
 
-      // function deletePost() {
-      //   return new Promise((resolve, reject) => {
-      //     setTimeout(() => {
-      //       if (posts.length > 0) {
-      //         const lastelement = posts.pop();
-      //         resolve(lastelement);
-      //       } else {
-      //         reject("Array is empty now");
-      //       }
-      //     }, 1000);
-      //   });
-      // }
+      function deletePost() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (posts.length > 0) {
+              const lastelement = posts.pop();
+              resolve(lastelement);
+            } else {
+              reject("Array is empty now");
+            }
+          }, 2000);
+        });
+      }
 
       console.log("Before Creating Last Post -> " + new Date());
       console.log("After Creating Last Post >>>");
-      Promise.all([createPost({ title: "Post Three", body: "This is post three" }), updatelastactivitytime(),]).then(([pos, lat]) => console.log(pos, "Last ActiTime -> " + lat));
       // promise 'resolve' ka part he console me aata ha.
+      Promise.all([createPost({ title: "Post Three", body: "This is post three" }), updatelastactivitytime(),]).then(([pos, lat]) => {
+        console.log(pos, "Last Activity Time -> " + lat);
+        deletePost().then(console.log('After Deleting Last Post '), console.log(posts))
+      })
     </script>
   </body>
 </html>
